@@ -15,7 +15,7 @@ func main() {
 	http.HandleFunc("/send", SendMessage)
 
 	fmt.Printf("Starting server at port %s ", Listen)
-	err := http.ListenAndServe(Listen, nil)
+	err := http.ListenAndServe("localhost:8081", nil)
 	if err != nil {
 		log.Fatal("Error starting the server:", err)
 	}
