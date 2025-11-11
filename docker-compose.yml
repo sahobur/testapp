@@ -1,0 +1,7 @@
+services:
+  server:
+    build:
+      dockerfile: ./Dockerfile
+    restart: no
+    ports:
+      - 8081:8081
