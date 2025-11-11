@@ -11,13 +11,12 @@ const (
 	Listen = ":8082"
 )
 
-//go:embed frontend/static/index.html
+//go:embed index.html
 var html string
 
 func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Println(r.URL.Path)
 		fmt.Fprint(w, html)
 	})
 	http.HandleFunc("/send", SendMessage)

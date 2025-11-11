@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Send mesage form</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Write your message</h1>
+        <form id="messageForm">
+            <label for="message">Message:</label>
+            <textarea 
+                id="message" 
+                name="message" 
+                placeholder="write message"
+                ></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const message = document.getElementById('message').value;
+                      
+            fetch('http://localhost:8081/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Server response', response);
+                return response.json();
+            })
+            .then(result => {
+                console.log('Server response:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+          
+            alert('Message sent successfully\n\n' + message);
+            
+            document.getElementById('message').value = '';
+        });
+    </script>
+</body>
+</html>
