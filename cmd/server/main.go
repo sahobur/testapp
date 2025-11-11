@@ -36,6 +36,7 @@ func SendMessage(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		message, err := io.ReadAll(r.Body)
 		if err != nil {
+			log.Println("Error reading message:", err)
 			fmt.Fprintf(w, "Error reading message: %v", err)
 			return
 		}

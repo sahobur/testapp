@@ -5,6 +5,10 @@ services:
     restart: no
     ports:
       - "8082:8082"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+        
   rabbitmq:
     image: rabbitmq:management-alpine
     hostname: rabbitmq
