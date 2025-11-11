@@ -12,7 +12,7 @@ func main() {
 func receiver() {
 	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	if err != nil {
-		log.Panic("Failed to connect to RabbitMQ", err)
+		log.Fatal("Failed to connect to RabbitMQ", err)
 	}
 	defer conn.Close()
 
