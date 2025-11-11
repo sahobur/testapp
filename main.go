@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	Listen = ":8081"
+	Listen = ":8082"
 )
 
 //go:embed frontend/static/index.html
@@ -23,7 +23,7 @@ func main() {
 	http.HandleFunc("/send", SendMessage)
 
 	fmt.Printf("Starting server at port %s ", Listen)
-	err := http.ListenAndServe("localhost:8081", nil)
+	err := http.ListenAndServe(Listen, nil)
 	if err != nil {
 		log.Fatal("Error starting the server:", err)
 	}

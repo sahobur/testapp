@@ -10,10 +10,10 @@ RUN CGO_ENABLED=0 GOOS=linux \
     go build -o server ./main.go
 
 
-FROM alpine:3.18
-RUN apk update \
-  && apk add  curl vim jq
+FROM alpine
 WORKDIR /app
 COPY --from=builder ./src/server ./
-ENV PATH="$PATH:/app"
-CMD ["./server"]
+ENV PATH=$PATH:/app
+CMD ./server
+
+

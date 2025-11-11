@@ -7,7 +7,14 @@ build: ## Build the application
 run: ## Run the application
 	./bin/server
 
-docker-build:
-	docker build . -t server
+docker-build: ## Build the docker image
+	docker compose build
+
+docker-run: ## run in docker compose
+	docker compose up -d
+
+docker-down: ## stop all containers
+	docker compose down
+
 
 
