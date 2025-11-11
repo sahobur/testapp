@@ -4,8 +4,7 @@ WORKDIR /src
 COPY ./go.mod ./go.mod
 #COPY ./go.sum ./go.sum
 COPY ./main.go ./main.go
-COPY ./internal ./internal
-COPY ./frontend ./frontend
+COPY ./index.html ./index.html
 RUN CGO_ENABLED=0 GOOS=linux \
     go build -o server ./main.go
 

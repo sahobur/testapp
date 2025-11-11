@@ -5,26 +5,19 @@
     <title>Send mesage form</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Write your message</h1>
-        <form id="messageForm">
-            <label for="message">Message:</label>
-            <textarea 
-                id="message" 
-                name="message" 
-                placeholder="write message"
-                ></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </div>
+<h1>Input message</h1>
+<form method="POST" id="messageForm">
+    <input type="text" id="message" name="name" placeholder="Enter your name">
+    <button type="submit">Send</button>
+</form>
 
     <script>
         document.getElementById('messageForm').addEventListener('submit', function(event) {
             event.preventDefault(); 
             
             const message = document.getElementById('message').value;
-                      
-            fetch('http://localhost:8081/send', {
+            console.log(message)
+            fetch('http://localhost:8082/send', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,18 +29,8 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Server response', response);
-                return response.json();
+                return response.ok;
             })
-            .then(result => {
-                console.log('Server response:', result);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
-          
-            alert('Message sent successfully\n\n' + message);
-            
             document.getElementById('message').value = '';
         });
     </script>
