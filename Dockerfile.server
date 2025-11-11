@@ -1,0 +1,19 @@
+FROM golang:1.25-alpine AS builder
+WORKDIR /src
+COPY ./vendor ./vendor
+COPY ./go.mod ./go.mod
+COPY ./go.sum ./go.sum
+COPY ./cmd/server ./server
+
+RUN go mod vendor
+RUN CGO_ENABLED=0 GOOS=linux \
+    go build -mod=vendor -o server ./server
+
+
+FROM alpine
+WORKDIR /app
+COPY --from=builder ./src/server ./
+ENV PATH=$PATH:/app
+CMD ./server
+
+
